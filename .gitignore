@@ -1,0 +1,8 @@
+*.pyc
+.idea/
+.vscode/
+my_*
+*.log
+
+test.in
+evaluate.py
