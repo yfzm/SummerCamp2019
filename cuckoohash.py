@@ -23,14 +23,15 @@ class CockooHash:
         self.change_list = []
 
     def set(self, key, value):
+        self.visited_keys = set()
+        self.change_list = []
+
         for bn, container in enumerate(self.containers):
             index = self.hashes[bn](key)
             if container[index].key == key:
                 container[index].value = value
                 return
 
-        self.visited_keys = set()
-        self.change_list = []
         if self.set_to_cx(0, key, value) != ABORT:
             for item in self.change_list:
                 self.containers[item.bucket_num][item.index] = KeyValue(item.key, item.value)

@@ -54,7 +54,7 @@ class LinearHash:
         while self.container[cur].key is not None:
             should_in = self.hash(self.container[cur].key)
             if should_in <= bucket_index:
-                if cur > bucket_index or cur < bucket_index and cur < should_in:
+                if cur > bucket_index or cur < should_in:
                     return cur
             cur = self.increase(cur)
         return None
