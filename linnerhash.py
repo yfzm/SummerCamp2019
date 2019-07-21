@@ -67,6 +67,7 @@ class LinearHash:
 
     def add_capacity(self):
         container_copy = self.container.copy()
+        self.counter = 0
         self.s *= 2
         self.container = [KeyValue(None, None) for i in range(self.s)]
         for item in container_copy:

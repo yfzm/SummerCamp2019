@@ -78,7 +78,6 @@ class CockooHash:
         return (key // self.s) % self.s
 
     def add_capacity(self):
-        # print("Increase size")
         all_kvs = []
         for item in self.containers[0] + self.containers[1]:
             all_kvs.append(item)
