@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import font
 from tkinter import messagebox
-from cuckoohash import CockooHash
+from cuckoohash import CuckooHash
 
 
 class App:
@@ -29,7 +29,7 @@ class App:
         self.canvas.bind("<Button-1>", self.continue_show)
         self.pause = False
 
-        self.ch = CockooHash(8)
+        self.ch = CuckooHash(8)
         # self.ch.set(89, 0)
         # self.ch.set(50, 0)
         # self.ch.set(3, 0)

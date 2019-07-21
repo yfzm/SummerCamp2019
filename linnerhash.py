@@ -5,7 +5,7 @@ from test import test_corr
 class LinearHash:
     def __init__(self, s):
         self.s = s
-        self.container = [KeyValue(None, None) for i in range(s)]
+        self.container = [KeyValue(None, None) for i in range(self.s)]
         self.counter = 0
 
     def set(self, key, value):
@@ -42,19 +42,19 @@ class LinearHash:
             index = self.increase(index)
 
     def remove_index(self, index):
-        next_index = self.search_fit_add_return(index)
+        next_index = self.search_fit_and_return_index(index)
         if next_index is None:
             self.container[index] = KeyValue(None, None)
         else:
             self.container[index] = self.container[next_index]
             self.remove_index(next_index)
 
-    def search_fit_add_return(self, bucket_index):
+    def search_fit_and_return_index(self, bucket_index):
         cur = self.increase(bucket_index)
         while self.container[cur].key is not None:
             should_in = self.hash(self.container[cur].key)
             if should_in <= bucket_index:
-                if cur > bucket_index or cur < should_in:
+                if cur < should_in or bucket_index < cur:
                     return cur
             cur = self.increase(cur)
         return None

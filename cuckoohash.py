@@ -14,7 +14,7 @@ class ChangeRecord:
         self.value = v
 
 
-class CockooHash:
+class CuckooHash:
     def __init__(self, s):
         self.s = s
         self.containers = ([KeyValue(None, None) for i in range(self.s)], [KeyValue(None, None) for i in range(self.s)])
@@ -91,7 +91,7 @@ class CockooHash:
 
 if __name__ == '__main__':
     flag_debug = False
-    ch = CockooHash(8)
+    ch = CuckooHash(8)
     dataset = "large"
     with open(dataset + ".in", "r") as f:
         lines = f.readlines()
