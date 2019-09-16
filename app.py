@@ -83,7 +83,8 @@ class App:
             x += 20
             y += 20
             if arr[i] is not None:
-                self.canvas.create_text(x, y, text=str(arr[i]), font=font.Font(size=18))
+                self.canvas.create_text(x, y, text=str(arr[i]), 
+                                        font=font.Font(size=18))
 
     def refresh_text(self):
         self.set_text(0, self.get_keys(0))
@@ -116,7 +117,8 @@ class App:
         self.ch.set(key, val)
         records = self.ch.change_list
         if len(records) > 1:
-            self.create_beginning_arrow(records[len(records)-1].index, records[len(records)-1].key)
+            self.create_beginning_arrow(records[len(records)-1].index, 
+                                        records[len(records)-1].key)
             for i in range(0, len(records) - 1):
                 bi, ei = records[i].index, records[i + 1].index
                 if records[i].bucket_num == 1:

@@ -17,7 +17,8 @@ class ChangeRecord:
 class CuckooHash:
     def __init__(self, s):
         self.s = s
-        self.containers = ([KeyValue(None, None) for i in range(self.s)], [KeyValue(None, None) for i in range(self.s)])
+        self.containers = ([KeyValue(None, None) for i in range(self.s)], 
+                           [KeyValue(None, None) for i in range(self.s)])
         self.hashes = (self.hash0, self.hash1)
         self.visited_keys = set()
         self.change_list = []
@@ -31,10 +32,16 @@ class CuckooHash:
             if container[index].key == key:
                 container[index].value = value
                 return
+        for bn, container in enumerate(self.containers):
+            index = self.hashes[bn](key)
+            if container[index].key is None:
+                container[index] = KeyValue(key, value)
+                return
 
         if self.set_to_cx(0, key, value) != ABORT:
             for item in self.change_list:
-                self.containers[item.bucket_num][item.index] = KeyValue(item.key, item.value)
+                self.containers[item.bucket_num][item.index] = \
+                    KeyValue(item.key, item.value)
         else:
             self.set(key, value)
 
@@ -83,7 +90,8 @@ class CuckooHash:
             all_kvs.append(item)
 
         self.s *= 2
-        self.containers = ([KeyValue(None, None) for i in range(self.s)], [KeyValue(None, None) for i in range(self.s)])
+        self.containers = ([KeyValue(None, None) for i in range(self.s)],
+                           [KeyValue(None, None) for i in range(self.s)])
         for item in all_kvs:
             if item.key is not None:
                 self.set(item.key, item.value)
@@ -124,4 +132,5 @@ if __name__ == '__main__':
                 f.write("null\n")
             else:
                 f.write(str(result) + "\n")
-    test_corr(mine="my_{}.ans".format(dataset), correct="{}.ans".format(dataset))
+    if dataset in ("small", "large"):
+        test_corr(mine="my_{}.ans".format(dataset), correct="{}.ans".format(dataset))

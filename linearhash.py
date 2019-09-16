@@ -108,4 +108,5 @@ if __name__ == '__main__':
                 f.write("null\n")
             else:
                 f.write(str(result) + "\n")
-    test_corr(mine="my_{}.ans".format(dataset), correct="{}.ans".format(dataset))
+    if dataset in ("large", "small"):
+        test_corr(mine="my_{}.ans".format(dataset), correct="{}.ans".format(dataset))
